@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Уфанет — подключить интернет в Уфе</title>
+<style>
+:root {
+  --ink: #12212c;
+  --muted: #5b6b78;
+  --brand: #0b5c8a;
+  --brand-dark: #084668;
+  --accent: #f2a03d;
+  --bg-soft: #f4f8fb;
+  --line: #dde7ee;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background: #fff;
+  line-height: 1.55;
+  font-size: 17px;
+}
+img, svg { max-width: 100%; }
+.wrap { width: min(1160px, 92%); margin: 0 auto; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 14px; }
+h1 { font-size: 46px; letter-spacing: -0.5px; }
+h2 { font-size: 34px; letter-spacing: -0.3px; }
+h3 { font-size: 21px; }
+p { margin: 0 0 14px; }
+.muted { color: var(--muted); }
+.btn {
+  display: inline-block; padding: 15px 28px; border-radius: 10px;
+  background: var(--accent); color: #23180a; font-weight: 700;
+  border: 0; cursor: pointer; font-size: 17px; font-family: inherit;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(242,160,61,.32); }
+.btn-ghost {
+  background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.55);
+  font-weight: 600;
+}
+.btn-ghost:hover { box-shadow: none; background: rgba(255,255,255,.08); }
+
+/* шапка */
+header {
+  position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--line); backdrop-filter: blur(8px);
+}
+.nav { display: flex; align-items: center; gap: 28px; height: 74px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px;
+        letter-spacing: -0.4px; }
+.logo-mark { width: 34px; height: 34px; border-radius: 9px; background: var(--brand);
+             display: grid; place-items: center; color: #fff; font-size: 18px; }
+.nav-links { display: flex; gap: 22px; margin-left: auto; font-size: 15px; color: var(--muted); }
+.nav-links a:hover { color: var(--brand); }
+.nav-phone { font-weight: 700; font-size: 17px; white-space: nowrap; }
+.nav-hint { display: block; font-size: 11px; font-weight: 500; color: var(--muted); }
+.nav .btn { padding: 11px 20px; font-size: 15px; }
+
+/* герой */
+.hero {
+  background:
+    radial-gradient(1100px 480px at 82% -12%, rgba(242,160,61,.20), transparent 60%),
+    linear-gradient(160deg, #0b5c8a 0%, #08425f 60%, #062f45 100%);
+  color: #fff; padding: 76px 0 84px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ""; position: absolute; right: -140px; bottom: -180px; width: 520px; height: 520px;
+  border-radius: 50%; border: 60px solid rgba(255,255,255,.055);
+}
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: start;
+             position: relative; z-index: 1; }
+.hero p.lead { font-size: 19px; color: rgba(255,255,255,.86); max-width: 30em; }
+.hero .tag {
+  display: inline-block; padding: 7px 14px; border-radius: 999px; font-size: 13px;
+  letter-spacing: .06em; text-transform: uppercase; background: rgba(255,255,255,.14);
+  margin-bottom: 20px;
+}
+.hero-actions { display: flex; gap: 14px; margin-top: 26px; flex-wrap: wrap; }
+
+/* форма */
+.card-form {
+  background: #fff; color: var(--ink); border-radius: 16px; padding: 28px;
+  box-shadow: 0 24px 60px rgba(3,25,39,.28);
+}
+.card-form h3 { margin-bottom: 6px; }
+.card-form .hint { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.field input {
+  width: 100%; padding: 13px 14px; border: 1px solid var(--line); border-radius: 9px;
+  font-size: 16px; font-family: inherit; color: var(--ink); background: #fbfdfe;
+}
+.field input:focus { outline: 2px solid rgba(11,92,138,.35); border-color: var(--brand); }
+.card-form .btn { width: 100%; margin-top: 6px; }
+.agree { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.45; }
+
+/* статистика */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; padding: 34px 0;
+         border-bottom: 1px solid var(--line); }
+.stats div b { display: block; font-size: 30px; color: var(--brand); line-height: 1.1; }
+.stats div span { font-size: 14px; color: var(--muted); }
+
+section { padding: 74px 0; }
+.section-head { max-width: 46em; margin-bottom: 40px; }
+.section-head p { color: var(--muted); font-size: 18px; }
+.soft { background: var(--bg-soft); }
+
+/* преимущества */
+.adv { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+.adv article {
+  background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 26px;
+}
+.adv .ico {
+  width: 44px; height: 44px; border-radius: 11px; background: rgba(11,92,138,.09);
+  display: grid; place-items: center; margin-bottom: 16px; color: var(--brand);
+}
+.adv p { color: var(--muted); margin: 0; font-size: 16px; }
+
+/* тарифы */
+.tariffs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+.tariff {
+  background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 28px;
+  position: relative;
+}
+.tariff.hit { border: 2px solid var(--brand); box-shadow: 0 18px 44px rgba(11,92,138,.16); }
+.badge {
+  position: absolute; top: -13px; left: 26px; background: var(--brand); color: #fff;
+  font-size: 12px; letter-spacing: .05em; text-transform: uppercase; padding: 5px 12px;
+  border-radius: 999px;
+}
+.tariff .speed { font-size: 34px; font-weight: 800; color: var(--brand); line-height: 1; }
+.tariff .name { font-size: 15px; color: var(--muted); margin: 6px 0 18px; }
+.price { font-size: 40px; font-weight: 800; letter-spacing: -1px; }
+.price small { font-size: 15px; font-weight: 500; color: var(--muted); }
+.old { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.old s, .old { text-decoration: none; }
+.tariff ul { list-style: none; padding: 0; margin: 20px 0 24px; }
+.tariff li { padding-left: 26px; position: relative; margin-bottom: 9px; font-size: 16px; }
+.tariff li::before {
+  content: ""; position: absolute; left: 0; top: 7px; width: 15px; height: 8px;
+  border-left: 2.5px solid var(--brand); border-bottom: 2.5px solid var(--brand);
+  transform: rotate(-45deg);
+}
+.tariff .btn { width: 100%; background: var(--brand); color: #fff; }
+.tariff .btn:hover { box-shadow: 0 10px 24px rgba(11,92,138,.3); }
+.tariff.hit .btn { background: var(--accent); color: #23180a; }
+
+/* шаги */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; counter-reset: s; }
+.steps article { background: #fff; border-radius: 14px; padding: 28px; border: 1px solid var(--line); }
+.steps article::before {
+  counter-increment: s; content: counter(s);
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--brand); color: #fff; font-weight: 700; margin-bottom: 16px;
+}
+.steps p { color: var(--muted); margin: 0; font-size: 16px; }
+
+/* отзыв / цифры доверия */
+.trust { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.quote {
+  background: #fff; border-left: 4px solid var(--accent); border-radius: 0 14px 14px 0;
+  padding: 26px 30px; border-top: 1px solid var(--line);
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.quote p { font-size: 18px; }
+.quote .who { font-size: 14px; color: var(--muted); }
+
+/* faq */
+details {
+  background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px;
+  margin-bottom: 12px;
+}
+details summary { cursor: pointer; font-weight: 600; font-size: 17px; list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: "+"; float: right; color: var(--brand); font-weight: 700; }
+details[open] summary::after { content: "–"; }
+details p { margin: 14px 0 0; color: var(--muted); }
+
+/* финальный призыв */
+.cta { background: linear-gradient(150deg, #0b5c8a, #062f45); color: #fff; }
+.cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+
+/* подвал */
+footer { background: #0c1a24; color: rgba(255,255,255,.72); padding: 52px 0 28px; font-size: 15px; }
+.foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 36px; }
+footer h4 { color: #fff; font-size: 16px; margin: 0 0 14px; }
+footer a:hover { color: #fff; }
+.foot-bottom { border-top: 1px solid rgba(255,255,255,.14); margin-top: 34px; padding-top: 18px;
+               display: flex; justify-content: space-between; gap: 20px; font-size: 13px;
+               color: rgba(255,255,255,.5); flex-wrap: wrap; }
+
+@media (max-width: 960px) {
+  h1 { font-size: 34px; } h2 { font-size: 27px; }
+  .hero-grid, .cta-grid, .trust { grid-template-columns: 1fr; gap: 30px; }
+  .adv, .tariffs, .steps, .stats, .foot { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  section { padding: 52px 0; }
+}
+
+@media (max-width: 700px) {
+  body { overflow-x: hidden; }
+  .nav { height: auto; padding: 12px 0; gap: 12px; }
+  .nav .btn { display: none; }
+  .nav-phone { margin-left: auto; font-size: 15px; }
+  .nav-hint { font-size: 10px; }
+  .logo { font-size: 19px; }
+  .logo-mark { width: 28px; height: 28px; }
+  .hero { padding: 36px 0 48px; }
+  .hero::after { display: none; }
+  h1 { font-size: 27px; }
+  h2 { font-size: 23px; }
+  .hero p.lead { font-size: 16px; }
+  .card-form { padding: 20px; border-radius: 12px; }
+  section { padding: 40px 0; }
+  .stats { gap: 14px; padding: 24px 0; }
+  .stats div b { font-size: 24px; }
+  .tariff, .steps article, .adv article { padding: 20px; }
+  .quote { padding: 18px 20px; }
+  .foot-bottom { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="logo-mark"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round"><path d="M4 13a11 11 0 0 1 16 0"/><path d="M7.5 16.6a6 6 0 0 1 9 0"/><circle cx="12" cy="20" r="1.4" fill="#ffffff" stroke="none"/></svg></span>Уфанет</div>
+    <nav class="nav-links">
+      <a href="#tariffs">Тарифы</a>
+      <a href="#how">Подключение</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#lead">Контакты</a>
+    </nav>
+    <div class="nav-phone">09388<span class="nav-hint">бесплатно с мобильных</span></div>
+    <a class="btn" href="#lead">Подключить</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag">Оптоволокно в Уфе</span>
+      <h1>Интернет, телевидение и видеонаблюдение в одном подключении</h1>
+      <p class="lead">Оптоволокно заходит в квартиру, а не в подъезд: скорость до 1 Гбит/с держится и вечером. Заявка занимает минуту, остальное сделаем сами.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#tariffs">Выбрать тариф</a>
+        <a class="btn btn-ghost" href="tel:09388">Позвонить: 09388</a>      </div>
+    </div>
+    
+      <form class="card-form" id="lead" onsubmit="return sendLead(event, 'lead')">
+        <h3>Подключить Уфанет</h3>
+        <p class="hint">Проверим адрес и перезвоним</p>
+        <div class="field">
+          <label for="lead-street">Улица и дом</label>
+          <input id="lead-street" name="street" type="text"
+                 placeholder="Например, Ленина, 12" required>
+        </div>
+        <div class="field">
+          <label for="lead-phone">Телефон</label>
+          <input id="lead-phone" name="phone" type="tel"
+                 placeholder="+7 (___) ___-__-__" required>
+        </div>
+        <button class="btn" type="submit">Проверить адрес</button>
+        <p class="agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+        и с политикой конфиденциальности.</p>
+        <p class="agree" id="lead-ok" style="display:none;color:#0b6b3a;font-weight:600">
+          Заявка отправлена. Менеджер свяжется с вами.</p>
+      </form>
+    
+  </div>
+</section>
+
+<div class="wrap stats"><div><b>113,9 Мбит/с</b><span>средняя скорость в Уфе по замерам TelecomDaily</span></div><div><b>70 тыс.</b><span>умных домофонов в городах присутствия</span></div><div><b>250 домов</b><span>в год сдают с нашими сетями</span></div><div><b>24/7</b><span>поддержка без выходных</span></div></div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Почему нас выбирают</h2>
+      <p>Мы строим сеть сами, поэтому отвечаем и за скорость, и за ремонт.
+      Ниже четыре причины, которые чаще всего называют в отзывах.</p>
+    </div>
+    <div class="adv"><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg></div><h3>Оптоволокно до квартиры</h3><p>Кабель заходит в квартиру, а не в подъезд. Скорость не проседает вечером, когда соседи включают кино.</p></article><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div><h3>Скорость подтверждена замерами</h3><p>113,9 Мбит/с в Уфе против 48,8 у ближайшего конкурента. Данные TelecomDaily, измерения август–сентябрь 2025 года.</p></article><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg></div><h3>Телевидение и архив</h3><p>240 каналов в пакетах с интернетом. Архив передач до двух недель, до пяти устройств на одном аккаунте.</p></article><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="17" cy="14.5" r="1.2" fill="currentColor" stroke="none"/></svg></div><h3>Умный дом в одном приложении</h3><p>Домофон, камеры, датчики протечки и дыма, телеметрия счётчиков. Оплата и смена тарифа без визита в офис.</p></article></div>
+  </div>
+</section>
+
+<section class="soft" id="tariffs">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Тарифы для дома</h2>
+      <p>Цены — по данным агрегатора тарифов на 20.11.2026. На сайте оператора
+      они могут отличаться из-за акций и адреса. Роутер входит в абонентскую
+      плату, отдельно покупать его не нужно.</p>
+    </div>
+    <div class="tariffs">
+        <article class="tariff">
+          <div class="speed">200 Мбит/с</div>
+          <div class="name">Продвинутый</div>
+          <div class="price">615 <small>₽/мес.</small></div>
+          
+          <ul><li>Подключение бесплатно</li><li>Wi-Fi роутер в аренду</li><li>Смена тарифа в приложении</li></ul>
+          <a class="btn" href="#lead">Подключить</a>
+        </article>
+        <article class="tariff hit"><span class='badge'>Выбирают чаще</span>
+          <div class="speed">700 Мбит/с</div>
+          <div class="name">Выгодный</div>
+          <div class="price">775 <small>₽/мес.</small></div>
+          
+          <ul><li>Подключение бесплатно</li><li>Wi-Fi роутер в аренду</li><li>Пакет с ТВ — 1 010 ₽</li></ul>
+          <a class="btn" href="#lead">Подключить</a>
+        </article>
+        <article class="tariff">
+          <div class="speed">1 000 Мбит/с</div>
+          <div class="name">Прорывной</div>
+          <div class="price">1 300 <small>₽/мес.</small></div>
+          
+          <ul><li>Подключение бесплатно</li><li>Wi-Fi роутер в аренду</li><li>Пакет с ТВ — 1 535 ₽</li></ul>
+          <a class="btn" href="#lead">Подключить</a>
+        </article></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Как проходит подключение</h2>
+      <p>От заявки до работающего интернета — один визит мастера.</p>
+    </div>
+    <div class="steps"><article><h3>Оставьте заявку</h3><p>Укажите адрес и телефон. Проверим, есть ли техническая возможность подключения именно в вашем доме.</p></article><article><h3>Согласуйте время</h3><p>Менеджер позвонит и предложит удобный интервал, в том числе вечерний.</p></article><article><h3>Дождитесь мастера</h3><p>Мастер привезёт оборудование, проложит кабель, настроит Wi-Fi и покажет личный кабинет.</p></article></div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap trust">
+    <div>
+      <h2>Сеть, которую строили 30 лет</h2>
+      <p class="muted">Оптические линии проходят до квартиры, а не до подъезда.
+      Поэтому скорость держится вечером, когда нагрузка на сеть максимальная.</p>
+      <p class="muted">Собственная служба монтажа и круглосуточная поддержка:
+      заявка принимается в любое время, мастер выезжает в согласованный интервал.</p>
+    </div>
+    <div class="quote">
+      <p>В Яндексе 4,5 балла по 2 260 оценкам, в 2ГИС — 4,6 по 1 705. Чаще всего
+      хвалят сервис-инженеров и стабильность связи, ругают рост цен и очереди
+      в офисах.</p>
+      <div class="who">Сводка отзывов за 20.11.2026: Яндекс.Карты, 2ГИС</div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head"><h2>Частые вопросы</h2></div>
+    <details><summary>Сколько ждать подключения?</summary><p>По данным агрегатора тарифов — четыре дня. Если кабель уже в квартире, есть подключение без выезда мастера.</p></details><details><summary>Нужно ли покупать роутер?</summary><p>Нет. Роутер выдаётся в аренду. Свой роутер тоже можно использовать, мастер поможет с настройкой.</p></details><details><summary>Можно ли перейти от другого оператора?</summary><p>Да. Заявку оформляет менеджер, визит в офис не нужен. Часть операций принимают в отделениях Сбера.</p></details><details><summary>Что входит в абонентскую плату?</summary><p>Интернет и аренда оборудования по тарифу. Телевидение подключается пакетом, отдельного счёта нет.</p></details>
+  </div>
+</section>
+
+<section class="cta" id="lead">
+  <div class="wrap cta-grid">
+    <div>
+      <h2>Проверьте, есть ли подключение по вашему адресу</h2>
+      <p class="muted" style="color:rgba(255,255,255,.8)">Оставьте адрес и телефон.
+      Менеджер скажет точную скорость, стоимость и ближайшую дату визита мастера.</p>
+      <p style="color:#fff;font-size:22px;font-weight:700">09388</p>
+      <p style="color:rgba(255,255,255,.75);font-size:15px">бесплатно с мобильных · +7 (347) 216-02-96</p>
+    </div>
+    
+      <form class="card-form" id="lead2" onsubmit="return sendLead(event, 'lead2')">
+        <h3>Подключить Уфанет</h3>
+        <p class="hint">Проверим адрес и перезвоним</p>
+        <div class="field">
+          <label for="lead2-street">Улица и дом</label>
+          <input id="lead2-street" name="street" type="text"
+                 placeholder="Например, Ленина, 12" required>
+        </div>
+        <div class="field">
+          <label for="lead2-phone">Телефон</label>
+          <input id="lead2-phone" name="phone" type="tel"
+                 placeholder="+7 (___) ___-__-__" required>
+        </div>
+        <button class="btn" type="submit">Оставить заявку</button>
+        <p class="agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+        и с политикой конфиденциальности.</p>
+        <p class="agree" id="lead2-ok" style="display:none;color:#0b6b3a;font-weight:600">
+          Заявка отправлена. Менеджер свяжется с вами.</p>
+      </form>
+    
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="logo" style="color:#fff"><span class="logo-mark"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round"><path d="M4 13a11 11 0 0 1 16 0"/><path d="M7.5 16.6a6 6 0 0 1 9 0"/><circle cx="12" cy="20" r="1.4" fill="#ffffff" stroke="none"/></svg></span>Уфанет</div>
+      <p style="margin-top:14px">Интернет, телевидение и видеонаблюдение
+      для дома и бизнеса в Башкортостане.</p>
+    </div>
+    <div>
+      <h4>Услуги</h4>
+      <p><a href="#tariffs">Домашний интернет</a><br>
+         <a href="#tariffs">Телевидение</a><br>
+         <a href="#tariffs">Видеонаблюдение</a></p>
+    </div>
+    <div>
+      <h4>Контакты</h4>
+      <p>09388 — бесплатно с мобильных<br>
+      +7 (347) 216-02-96<br>
+      Уфа, круглосуточно</p>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© Уфанет. Учебный макет посадочной страницы для практической работы</span>
+    <span>Политика конфиденциальности · Согласие на обработку данных</span>
+  </div>
+</footer>
+
+<script>
+function sendLead(e, id) {
+  e.preventDefault();
+  document.getElementById(id + '-ok').style.display = 'block';
+  e.target.querySelector('button[type=submit]').textContent = 'Заявка отправлена';
+  return false;
+}
+</script>
+</body>
+</html>
