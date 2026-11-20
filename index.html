@@ -112,6 +112,12 @@ section { padding: 74px 0; }
 .section-head p { color: var(--muted); font-size: 18px; }
 .soft { background: var(--bg-soft); }
 
+/* плашка учебного макета */
+.notice { background: #FFF4E0; border-bottom: 1px solid #EFD8AC; color: #6B4A12;
+          font-size: 13.5px; line-height: 1.4; padding: 8px 0; }
+.notice .wrap { display: flex; gap: 10px; align-items: baseline; }
+.notice b { color: #523808; }
+
 /* преимущества */
 .adv { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
 .adv article {
@@ -230,6 +236,14 @@ footer a:hover { color: #fff; }
 </head>
 <body>
 
+<div class="notice">
+  <div class="wrap">
+    <span><b>Учебный макет.</b> Это не официальный сайт АО «Уфанет»: страница
+    сделана для практической работы по цифровому маркетингу. Формы демонстрационные,
+    данные никуда не отправляются.</span>
+  </div>
+</div>
+
 <header>
   <div class="wrap nav">
     <div class="logo"><span class="logo-mark"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round"><path d="M4 13a11 11 0 0 1 16 0"/><path d="M7.5 16.6a6 6 0 0 1 9 0"/><circle cx="12" cy="20" r="1.4" fill="#ffffff" stroke="none"/></svg></span>Уфанет</div>
@@ -269,10 +283,10 @@ footer a:hover { color: #fff; }
                  placeholder="+7 (___) ___-__-__" required>
         </div>
         <button class="btn" type="submit">Проверить адрес</button>
-        <p class="agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных
-        и с политикой конфиденциальности.</p>
+        <p class="agree"><b>Форма демонстрационная.</b> Данные никуда не отправляются
+        и не сохраняются.</p>
         <p class="agree" id="lead-ok" style="display:none;color:#0b6b3a;font-weight:600">
-          Заявка отправлена. Менеджер свяжется с вами.</p>
+          Это макет: заявка не отправлена, данные никуда не ушли.</p>
       </form>
     
   </div>
@@ -308,7 +322,7 @@ footer a:hover { color: #fff; }
           <ul><li>Подключение бесплатно</li><li>Wi-Fi роутер в аренду</li><li>Смена тарифа в приложении</li></ul>
           <a class="btn" href="#lead">Подключить</a>
         </article>
-        <article class="tariff hit"><span class='badge'>Выбирают чаще</span>
+        <article class="tariff hit"><span class='badge'>Для дома и работы</span>
           <div class="speed">700 Мбит/с</div>
           <div class="name">Выгодный</div>
           <div class="price">775 <small>₽/мес.</small></div>
@@ -386,10 +400,10 @@ footer a:hover { color: #fff; }
                  placeholder="+7 (___) ___-__-__" required>
         </div>
         <button class="btn" type="submit">Оставить заявку</button>
-        <p class="agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных
-        и с политикой конфиденциальности.</p>
+        <p class="agree"><b>Форма демонстрационная.</b> Данные никуда не отправляются
+        и не сохраняются.</p>
         <p class="agree" id="lead2-ok" style="display:none;color:#0b6b3a;font-weight:600">
-          Заявка отправлена. Менеджер свяжется с вами.</p>
+          Это макет: заявка не отправлена, данные никуда не ушли.</p>
       </form>
     
   </div>
@@ -416,8 +430,9 @@ footer a:hover { color: #fff; }
     </div>
   </div>
   <div class="wrap foot-bottom">
-    <span>© Уфанет. Учебный макет посадочной страницы для практической работы</span>
-    <span>Политика конфиденциальности · Согласие на обработку данных</span>
+    <span>© Уфанет. Учебный макет посадочной страницы для практической работы
+    по дисциплине «Цифровой маркетинг»</span>
+    <span>Права на обозначение «Уфанет» принадлежат АО «Уфанет»</span>
   </div>
 </footer>
 
