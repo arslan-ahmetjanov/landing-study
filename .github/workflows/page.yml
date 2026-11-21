@@ -1,0 +1,23 @@
+name: page
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: check markup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      # Проверки разметки без браузера: уникальные id, живые якоря,
+      # отсутствие инлайновых обработчиков, alt, иерархия заголовков.
+      - name: Check HTML
+        run: python tools/check_html.py index.html
