@@ -2,9 +2,21 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="noindex, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Уфанет — учебный макет лендинга, практическая работа</title>
+<meta name="description" content="Учебный макет посадочной страницы интернет-провайдера: тарифы, подключение оптоволокна, телевидение и видеонаблюдение. Демонстрационная работа, заявки никуда не отправляются.">
+<link rel="canonical" href="https://arslan-ahmetjanov.github.io/landing-study/">
+<meta name="theme-color" content="#0b5c8a">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Уфанет — учебный макет лендинга, практическая работа">
+<meta property="og:description" content="Учебный макет посадочной страницы интернет-провайдера: тарифы, подключение оптоволокна, телевидение и видеонаблюдение.">
+<meta property="og:url" content="https://arslan-ahmetjanov.github.io/landing-study/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Уфанет — учебный макет лендинга">
+<meta name="twitter:description" content="Учебный макет посадочной страницы интернет-провайдера: тарифы, подключение оптоволокна, телевидение и видеонаблюдение.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b5c8a'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M7 18a13 13 0 0 1 18 0'/%3E%3Cpath d='M11 22.5a7.5 7.5 0 0 1 10 0'/%3E%3C/g%3E%3Ccircle cx='16' cy='26' r='1.9' fill='%23fff'/%3E%3C/svg%3E">
 <style>
 :root {
   --ink: #12212c;
@@ -16,7 +28,11 @@
   --line: #dde7ee;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
@@ -28,6 +44,13 @@ body {
 img, svg { max-width: 100%; }
 .wrap { width: min(1160px, 92%); margin: 0 auto; }
 a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+  outline: 3px solid var(--brand); outline-offset: 2px;
+}
+.hero a:focus-visible, .cta a:focus-visible, footer a:focus-visible,
+.btn-ghost:focus-visible, .tariff .btn:focus-visible {
+  outline-color: #f2a03d;
+}
 h1, h2, h3 { line-height: 1.2; margin: 0 0 14px; }
 h1 { font-size: 46px; letter-spacing: -0.5px; }
 h2 { font-size: 34px; letter-spacing: -0.3px; }
@@ -89,7 +112,7 @@ header {
   background: #fff; color: var(--ink); border-radius: 16px; padding: 28px;
   box-shadow: 0 24px 60px rgba(3,25,39,.28);
 }
-.card-form h3 { margin-bottom: 6px; }
+.card-form .form-title { font-size: 21px; margin-bottom: 6px; }
 .card-form .hint { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
 .field { margin-bottom: 14px; }
 .field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
@@ -98,14 +121,18 @@ header {
   font-size: 16px; font-family: inherit; color: var(--ink); background: #fbfdfe;
 }
 .field input:focus { outline: 2px solid rgba(11,92,138,.35); border-color: var(--brand); }
+.field input:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
 .card-form .btn { width: 100%; margin-top: 6px; }
+.btn[disabled] { cursor: default; opacity: .72; transform: none; box-shadow: none; }
 .agree { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.45; }
+.form-msg { margin: 12px 0 0; color: #0b6b3a; font-weight: 600; }
 
 /* статистика */
+.stats-section { padding: 0; }
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; padding: 34px 0;
-         border-bottom: 1px solid var(--line); }
-.stats div b { display: block; font-size: 30px; color: var(--brand); line-height: 1.1; }
-.stats div span { font-size: 14px; color: var(--muted); }
+         margin: 0; border-bottom: 1px solid var(--line); }
+.stats div dt { display: block; font-size: 30px; color: var(--brand); line-height: 1.1; }
+.stats div dd { margin: 0; font-size: 14px; color: var(--muted); }
 
 section { padding: 74px 0; }
 .section-head { max-width: 46em; margin-bottom: 40px; }
@@ -141,12 +168,11 @@ section { padding: 74px 0; }
   font-size: 12px; letter-spacing: .05em; text-transform: uppercase; padding: 5px 12px;
   border-radius: 999px;
 }
+.tariff .tariff-head { display: flex; flex-direction: column-reverse; margin: 0 0 18px; }
 .tariff .speed { font-size: 34px; font-weight: 800; color: var(--brand); line-height: 1; }
-.tariff .name { font-size: 15px; color: var(--muted); margin: 6px 0 18px; }
+.tariff .name { font-size: 15px; font-weight: 400; color: var(--muted); margin: 6px 0 0; }
 .price { font-size: 40px; font-weight: 800; letter-spacing: -1px; }
 .price small { font-size: 15px; font-weight: 500; color: var(--muted); }
-.old { color: var(--muted); font-size: 14px; margin-top: 4px; }
-.old s, .old { text-decoration: none; }
 .tariff ul { list-style: none; padding: 0; margin: 20px 0 24px; }
 .tariff li { padding-left: 26px; position: relative; margin-bottom: 9px; font-size: 16px; }
 .tariff li::before {
@@ -196,24 +222,40 @@ details p { margin: 14px 0 0; color: var(--muted); }
 /* подвал */
 footer { background: #0c1a24; color: rgba(255,255,255,.72); padding: 52px 0 28px; font-size: 15px; }
 .foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 36px; }
-footer h4 { color: #fff; font-size: 16px; margin: 0 0 14px; }
+footer .foot-title { color: #fff; font-size: 16px; margin: 0 0 14px; line-height: 1.2; }
+.foot-links { list-style: none; padding: 0; margin: 0; }
+.foot-links li + li { margin-top: 2px; }
+footer a {
+  display: inline-block; min-height: 24px; padding: 3px 0;
+  color: rgba(255,255,255,.9); text-decoration: underline;
+  text-decoration-thickness: 1px; text-underline-offset: 3px;
+}
 footer a:hover { color: #fff; }
 .foot-bottom { border-top: 1px solid rgba(255,255,255,.14); margin-top: 34px; padding-top: 18px;
                display: flex; justify-content: space-between; gap: 20px; font-size: 13px;
                color: rgba(255,255,255,.5); flex-wrap: wrap; }
 
 @media (max-width: 960px) {
+  html { scroll-padding-top: 108px; }
   h1 { font-size: 34px; } h2 { font-size: 27px; }
   .hero-grid, .cta-grid, .trust { grid-template-columns: 1fr; gap: 30px; }
-  .adv, .tariffs, .steps, .stats, .foot { grid-template-columns: 1fr; }
+  .adv, .tariffs, .steps, .foot { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); }
-  .nav-links { display: none; }
+  .nav { flex-wrap: wrap; height: auto; padding: 10px 0 0; row-gap: 6px; }
+  .nav-phone { margin-left: auto; }
+  .nav-links {
+    order: 9; display: flex; width: 100%; margin-left: 0; gap: 20px;
+    overflow-x: auto; font-size: 14px; padding: 2px 0 10px;
+  }
+  .nav-links a { white-space: nowrap; padding: 6px 0; }
+  .nav .btn { padding: 10px 16px; }
   section { padding: 52px 0; }
 }
 
 @media (max-width: 700px) {
+  html { scroll-padding-top: 104px; }
   body { overflow-x: hidden; }
-  .nav { height: auto; padding: 12px 0; gap: 12px; }
+  .nav { height: auto; padding: 12px 0 0; gap: 12px; }
   .nav .btn { display: none; }
   .nav-phone { margin-left: auto; font-size: 15px; }
   .nav-hint { font-size: 10px; }
@@ -227,10 +269,16 @@ footer a:hover { color: #fff; }
   .card-form { padding: 20px; border-radius: 12px; }
   section { padding: 40px 0; }
   .stats { gap: 14px; padding: 24px 0; }
-  .stats div b { font-size: 24px; }
+  .stats div dt { font-size: 24px; }
   .tariff, .steps article, .adv article { padding: 20px; }
   .quote { padding: 18px 20px; }
   .foot-bottom { flex-direction: column; gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+  .btn:hover { transform: none; box-shadow: none; }
 }
 </style>
 </head>
@@ -246,18 +294,19 @@ footer a:hover { color: #fff; }
 
 <header>
   <div class="wrap nav">
-    <div class="logo"><span class="logo-mark"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round"><path d="M4 13a11 11 0 0 1 16 0"/><path d="M7.5 16.6a6 6 0 0 1 9 0"/><circle cx="12" cy="20" r="1.4" fill="#ffffff" stroke="none"/></svg></span>Уфанет</div>
-    <nav class="nav-links">
+    <div class="logo"><span class="logo-mark"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 13a11 11 0 0 1 16 0"/><path d="M7.5 16.6a6 6 0 0 1 9 0"/><circle cx="12" cy="20" r="1.4" fill="#ffffff" stroke="none"/></svg></span>Уфанет</div>
+    <nav class="nav-links" aria-label="Разделы страницы">
       <a href="#tariffs">Тарифы</a>
       <a href="#how">Подключение</a>
       <a href="#faq">Вопросы</a>
       <a href="#lead">Контакты</a>
     </nav>
-    <div class="nav-phone">09388<span class="nav-hint">бесплатно с мобильных</span></div>
+    <div class="nav-phone">8 800 000-00-00<span class="nav-hint">бесплатно с мобильных</span></div>
     <a class="btn" href="#lead">Подключить</a>
   </div>
 </header>
 
+<main>
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
@@ -266,33 +315,43 @@ footer a:hover { color: #fff; }
       <p class="lead">Оптоволокно заходит в квартиру, а не в подъезд: скорость до 1 Гбит/с держится и вечером. Заявка занимает минуту, остальное сделаем сами.</p>
       <div class="hero-actions">
         <a class="btn" href="#tariffs">Выбрать тариф</a>
-        <a class="btn btn-ghost" href="tel:09388">Позвонить: 09388</a>      </div>
+        <a class="btn btn-ghost" href="tel:88000000000">Позвонить: 8 800 000-00-00</a>      </div>
     </div>
     
-      <form class="card-form" id="lead" onsubmit="return sendLead(event, 'lead')">
-        <h3>Подключить Уфанет</h3>
+      <form class="card-form" id="lead-hero" method="post" action="#">
+        <h2 class="form-title">Подключить Уфанет</h2>
         <p class="hint">Проверим адрес и перезвоним</p>
         <div class="field">
-          <label for="lead-street">Улица и дом</label>
-          <input id="lead-street" name="street" type="text"
+          <label for="lead-hero-street">Улица и дом</label>
+          <input id="lead-hero-street" name="street" type="text" autocomplete="street-address"
                  placeholder="Например, Ленина, 12" required>
         </div>
         <div class="field">
-          <label for="lead-phone">Телефон</label>
-          <input id="lead-phone" name="phone" type="tel"
+          <label for="lead-hero-phone">Телефон</label>
+          <input id="lead-hero-phone" name="phone" type="tel" inputmode="tel"
+                 autocomplete="tel" pattern="[\+0-9\(\)\s\-]{7,20}" maxlength="20"
                  placeholder="+7 (___) ___-__-__" required>
         </div>
         <button class="btn" type="submit">Проверить адрес</button>
         <p class="agree"><b>Форма демонстрационная.</b> Данные никуда не отправляются
         и не сохраняются.</p>
-        <p class="agree" id="lead-ok" style="display:none;color:#0b6b3a;font-weight:600">
-          Это макет: заявка не отправлена, данные никуда не ушли.</p>
+        <p class="agree form-msg" id="lead-hero-ok" role="status" aria-live="polite" hidden></p>
       </form>
     
   </div>
 </section>
 
-<div class="wrap stats"><div><b>113,9 Мбит/с</b><span>средняя скорость в Уфе по замерам TelecomDaily</span></div><div><b>70 тыс.</b><span>умных домофонов в городах присутствия</span></div><div><b>250 домов</b><span>в год сдают с нашими сетями</span></div><div><b>24/7</b><span>поддержка без выходных</span></div></div>
+<section class="stats-section" aria-labelledby="stats-title">
+  <div class="wrap">
+    <h2 class="visually-hidden" id="stats-title">Уфанет в цифрах</h2>
+    <dl class="stats">
+      <div><dt>113,9 Мбит/с</dt><dd>средняя скорость в Уфе по замерам TelecomDaily</dd></div>
+      <div><dt>70 тыс.</dt><dd>умных домофонов в городах присутствия</dd></div>
+      <div><dt>250 домов</dt><dd>в год сдают с нашими сетями</dd></div>
+      <div><dt>24/7</dt><dd>поддержка без выходных</dd></div>
+    </dl>
+  </div>
+</section>
 
 <section>
   <div class="wrap">
@@ -301,7 +360,7 @@ footer a:hover { color: #fff; }
       <p>Мы строим сеть сами, поэтому отвечаем и за скорость, и за ремонт.
       Ниже четыре причины, которые чаще всего называют в отзывах.</p>
     </div>
-    <div class="adv"><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg></div><h3>Оптоволокно до квартиры</h3><p>Кабель заходит в квартиру, а не в подъезд. Скорость не проседает вечером, когда соседи включают кино.</p></article><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div><h3>Скорость подтверждена замерами</h3><p>113,9 Мбит/с в Уфе против 48,8 у ближайшего конкурента. Данные TelecomDaily, измерения август–сентябрь 2025 года.</p></article><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg></div><h3>Телевидение и архив</h3><p>240 каналов в пакетах с интернетом. Архив передач до двух недель, до пяти устройств на одном аккаунте.</p></article><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="17" cy="14.5" r="1.2" fill="currentColor" stroke="none"/></svg></div><h3>Умный дом в одном приложении</h3><p>Домофон, камеры, датчики протечки и дыма, телеметрия счётчиков. Оплата и смена тарифа без визита в офис.</p></article></div>
+    <div class="adv"><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg></div><h3>Оптоволокно до квартиры</h3><p>Кабель заходит в квартиру, а не в подъезд. Скорость не проседает вечером, когда соседи включают кино.</p></article><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div><h3>Скорость подтверждена замерами</h3><p>113,9 Мбит/с в Уфе против 48,8 у ближайшего конкурента. Данные TelecomDaily, измерения август–сентябрь 2025 года.</p></article><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg></div><h3>Телевидение и архив</h3><p>240 каналов в пакетах с интернетом. Архив передач до двух недель, до пяти устройств на одном аккаунте.</p></article><article><div class='ico'><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="17" cy="14.5" r="1.2" fill="currentColor" stroke="none"/></svg></div><h3>Умный дом в одном приложении</h3><p>Домофон, камеры, датчики протечки и дыма, телеметрия счётчиков. Оплата и смена тарифа без визита в офис.</p></article></div>
   </div>
 </section>
 
@@ -315,24 +374,21 @@ footer a:hover { color: #fff; }
     </div>
     <div class="tariffs">
         <article class="tariff">
-          <div class="speed">200 Мбит/с</div>
-          <div class="name">Продвинутый</div>
+          <h3 class="tariff-head"><span class="name">Продвинутый</span><span class="speed">200 Мбит/с</span></h3>
           <div class="price">615 <small>₽/мес.</small></div>
           
           <ul><li>Подключение бесплатно</li><li>Wi-Fi роутер в аренду</li><li>Смена тарифа в приложении</li></ul>
           <a class="btn" href="#lead">Подключить</a>
         </article>
         <article class="tariff hit"><span class='badge'>Для дома и работы</span>
-          <div class="speed">700 Мбит/с</div>
-          <div class="name">Выгодный</div>
+          <h3 class="tariff-head"><span class="name">Выгодный</span><span class="speed">700 Мбит/с</span></h3>
           <div class="price">775 <small>₽/мес.</small></div>
           
           <ul><li>Подключение бесплатно</li><li>Wi-Fi роутер в аренду</li><li>Пакет с ТВ — 1 010 ₽</li></ul>
           <a class="btn" href="#lead">Подключить</a>
         </article>
         <article class="tariff">
-          <div class="speed">1 000 Мбит/с</div>
-          <div class="name">Прорывной</div>
+          <h3 class="tariff-head"><span class="name">Прорывной</span><span class="speed">1 000 Мбит/с</span></h3>
           <div class="price">1 300 <small>₽/мес.</small></div>
           
           <ul><li>Подключение бесплатно</li><li>Wi-Fi роутер в аренду</li><li>Пакет с ТВ — 1 535 ₽</li></ul>
@@ -382,50 +438,52 @@ footer a:hover { color: #fff; }
       <h2>Проверьте, есть ли подключение по вашему адресу</h2>
       <p class="muted" style="color:rgba(255,255,255,.8)">Оставьте адрес и телефон.
       Менеджер скажет точную скорость, стоимость и ближайшую дату визита мастера.</p>
-      <p style="color:#fff;font-size:22px;font-weight:700">09388</p>
-      <p style="color:rgba(255,255,255,.75);font-size:15px">бесплатно с мобильных · +7 (347) 216-02-96</p>
+      <p style="color:#fff;font-size:22px;font-weight:700">8 800 000-00-00</p>
+      <p style="color:rgba(255,255,255,.75);font-size:15px">бесплатно с мобильных · круглосуточно</p>
     </div>
     
-      <form class="card-form" id="lead2" onsubmit="return sendLead(event, 'lead2')">
-        <h3>Подключить Уфанет</h3>
+      <form class="card-form" id="lead2" method="post" action="#">
+        <h2 class="form-title">Подключить Уфанет</h2>
         <p class="hint">Проверим адрес и перезвоним</p>
         <div class="field">
           <label for="lead2-street">Улица и дом</label>
-          <input id="lead2-street" name="street" type="text"
+          <input id="lead2-street" name="street" type="text" autocomplete="street-address"
                  placeholder="Например, Ленина, 12" required>
         </div>
         <div class="field">
           <label for="lead2-phone">Телефон</label>
-          <input id="lead2-phone" name="phone" type="tel"
+          <input id="lead2-phone" name="phone" type="tel" inputmode="tel"
+                 autocomplete="tel" pattern="[\+0-9\(\)\s\-]{7,20}" maxlength="20"
                  placeholder="+7 (___) ___-__-__" required>
         </div>
         <button class="btn" type="submit">Оставить заявку</button>
         <p class="agree"><b>Форма демонстрационная.</b> Данные никуда не отправляются
         и не сохраняются.</p>
-        <p class="agree" id="lead2-ok" style="display:none;color:#0b6b3a;font-weight:600">
-          Это макет: заявка не отправлена, данные никуда не ушли.</p>
+        <p class="agree form-msg" id="lead2-ok" role="status" aria-live="polite" hidden></p>
       </form>
     
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap foot">
     <div>
-      <div class="logo" style="color:#fff"><span class="logo-mark"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round"><path d="M4 13a11 11 0 0 1 16 0"/><path d="M7.5 16.6a6 6 0 0 1 9 0"/><circle cx="12" cy="20" r="1.4" fill="#ffffff" stroke="none"/></svg></span>Уфанет</div>
+      <div class="logo" style="color:#fff"><span class="logo-mark"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 13a11 11 0 0 1 16 0"/><path d="M7.5 16.6a6 6 0 0 1 9 0"/><circle cx="12" cy="20" r="1.4" fill="#ffffff" stroke="none"/></svg></span>Уфанет</div>
       <p style="margin-top:14px">Интернет, телевидение и видеонаблюдение
       для дома и бизнеса в Башкортостане.</p>
     </div>
     <div>
-      <h4>Услуги</h4>
-      <p><a href="#tariffs">Домашний интернет</a><br>
-         <a href="#tariffs">Телевидение</a><br>
-         <a href="#tariffs">Видеонаблюдение</a></p>
+      <h2 class="foot-title">Услуги</h2>
+      <ul class="foot-links">
+        <li><a href="#tariffs">Домашний интернет</a></li>
+        <li><a href="#tariffs">Телевидение</a></li>
+        <li><a href="#tariffs">Видеонаблюдение</a></li>
+      </ul>
     </div>
     <div>
-      <h4>Контакты</h4>
-      <p>09388 — бесплатно с мобильных<br>
-      +7 (347) 216-02-96<br>
+      <h2 class="foot-title">Контакты</h2>
+      <p><a href="tel:88000000000">8 800 000-00-00</a> — бесплатно с мобильных<br>
       Уфа, круглосуточно</p>
     </div>
   </div>
@@ -437,12 +495,25 @@ footer a:hover { color: #fff; }
 </footer>
 
 <script>
-function sendLead(e, id) {
-  e.preventDefault();
-  document.getElementById(id + '-ok').style.display = 'block';
-  e.target.querySelector('button[type=submit]').textContent = 'Заявка отправлена';
-  return false;
-}
+(function () {
+  var OK_TEXT = 'Это макет: заявка не отправлена, данные никуда не ушли.';
+  var forms = document.querySelectorAll('form.card-form');
+  Array.prototype.forEach.call(forms, function (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var button = form.querySelector('button[type="submit"]');
+      var message = document.getElementById(form.id + '-ok');
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Заявка отправлена';
+      }
+      if (message) {
+        message.textContent = OK_TEXT;
+        message.hidden = false;
+      }
+    });
+  });
+}());
 </script>
 </body>
 </html>
